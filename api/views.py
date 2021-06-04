@@ -5,7 +5,7 @@ from rest_framework.permissions import (IsAuthenticated,
                                         IsAuthenticatedOrReadOnly)
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Follow, Group, Post
+from .models import Group, Post
 from .permissions import IsAuthorOrReadOnly
 from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
                           PostSerializer)
@@ -43,7 +43,7 @@ class FollowViewSet(ModelViewSet):
     search_fields = ['user__username', 'following__username']
 
     def get_queryset(self):
-        return Follow.objects.filter(following=self.request.user)
+        return self.request.user.following.all()
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -52,7 +52,4 @@ class FollowViewSet(ModelViewSet):
 class GroupViewSet(ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
-    permission_classes = (IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly,)
-
-    def perform_create(self, serializer):
-        serializer.save()
+    permission_classes = (IsAuthenticatedOrReadOnly,)

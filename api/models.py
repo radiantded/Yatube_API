@@ -58,9 +58,8 @@ class Comment(models.Model):
 
 class Group(models.Model):
     title = models.CharField('Название группы', max_length=200)
-    description = models.TextField('Описание', blank=True, null=True)
-    slug = models.SlugField('Уникальный ключ', max_length=200,
-                            blank=True, null=True)
+    description = models.TextField('Описание')
+    slug = models.SlugField('Ключ', max_length=200)
 
     class Meta:
         verbose_name = 'Группа'

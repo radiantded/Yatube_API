@@ -11,20 +11,21 @@ from .views import CommentsViewSet, PostsViewSet, FollowViewSet, GroupViewSet
 router_v1 = routers.DefaultRouter()
 router_v1.register('v1/posts',
                    PostsViewSet,
-                   basename='api_posts')
+                   basename='posts')
 router_v1.register(r'v1/posts/(?P<post_id>\d+)/comments',
                    CommentsViewSet,
-                   basename='api_comments')
+                   basename='comments')
 router_v1.register('v1/follow',
                    FollowViewSet,
-                   basename='api_follow')
+                   basename='follow')
 router_v1.register('v1/group',
                    GroupViewSet,
-                   basename='api_group')
+                   basename='group')
 
 
 urlpatterns = [
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('v1/token/refresh/', TokenRefreshView.as_view(),
+         name='token_refresh'),
     path('', include(router_v1.urls)),
 ]

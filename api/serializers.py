@@ -36,15 +36,14 @@ class FollowSerializer(serializers.ModelSerializer):
         default=serializers.CurrentUserDefault()
     )
     following = serializers.SlugRelatedField(
-        read_only=False,
         slug_field='username',
         queryset=User.objects.all()
     )
 
-    def validate(self, attrs):
-        if self.context['request'].user == attrs['following']:
+    def validate_following(self, following):
+        if self.context['request'].user == following:
             raise ValidationError('Вы не можете подписаться на самого себя')
-        return attrs
+        return following
 
     class Meta:
         model = Follow
