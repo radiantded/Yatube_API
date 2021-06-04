@@ -13,8 +13,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Group)
 class GroupAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('title',)}
-    list_display = ('title', 'description', 'slug')
+    list_display = ('title',)
 
 
 @admin.register(Comment)
