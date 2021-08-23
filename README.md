@@ -1,4 +1,4 @@
-# Yatube API
+# Yatube REST API
 API для социальной сети Yatube на базе Django REST Framework.
 
 ## Функционал
